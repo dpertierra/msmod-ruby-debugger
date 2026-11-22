@@ -1,9 +1,27 @@
 {
-  "id": "com.dpertierrra.ruby-debugger",
+  "id": "com.dpertierra.ruby-debugger",
   "name": "Ruby Debugger (VS Code)",
   "version": "1.0.0",
   "apiVersion": "1.0.0",
-  "description": "Toggles the Ruby debugger on the next launch of a compatible game.",
   "main": "index.js",
-  "permissions": ["fs.project", "fs.write.project", "ui.toasts"]
+  "authors": [
+    {
+      "name": "DPertierra",
+      "url": "https://github.com/dpertierra"
+    }
+  ],
+  "description": "Toggles the Ruby debugger on the next launch of a compatible game.",
+  "permissions": [
+    "fs.project",
+    "fs.write.project",
+    "ui.toasts"
+  ],
+  "requires": [],
+  "tags": [
+    "debugger",
+    "ruby",
+    "vscode",
+    "essentials"
+  ],
+  "homepage": "https://github.com/dpertierra/msmod-ruby-debugger"
 }

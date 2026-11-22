@@ -34,16 +34,15 @@ export async function activate(ctx) {
       try {
         await ctx.fs.readProjectFile(debuggerScript);
         if (ctx.editor.gameRoot() !== root) return;
-        const wasEnabled = await ctx.fs.projectExists(marker);
+        let wasEnabled = false;
+        if (await ctx.fs.projectExists(marker)) {
+          // "off" or "0" disables the debugger without deleting the file.
+          const mode = (await ctx.fs.readProjectFile(marker)).trim().toLowerCase();
+          wasEnabled = mode !== "off" && mode !== "0";
+        }
         if (ctx.editor.gameRoot() !== root) return;
 
-        if (wasEnabled) {
-          // The project filesystem API has no delete operation.
-          const path = root.replace(/[\\/]+$/, "") + "/" + marker;
-          await window.__TAURI__.core.invoke("delete_file", { path });
-        } else {
-          await ctx.fs.writeProjectFile(marker, "1");
-        }
+        await ctx.fs.writeProjectFile(marker, wasEnabled ? "off" : "1");
         ctx.ui.showToast({ message: ctx.i18n.t(wasEnabled ? disabled : enabled) });
       } catch (error) {
         ctx.ui.showToast({ message: ctx.i18n.t(failed, { error: String(error) }) });

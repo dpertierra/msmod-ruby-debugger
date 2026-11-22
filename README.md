@@ -1,6 +1,31 @@
 # Ruby Debugger (VS Code)
 
-Copia la carpeta `com.dpertierra.ruby-debugger` en `Plugins/MakerStudio/003_Editor/Mods/` de tu juego y vuelve a abrir el proyecto. Activa el mod en el gestor de mods si está desactivado.
+Maker Studio mod that turns the Ruby debugger of a compatible game on and off.
 
-En proyectos con `Debugger/debugger.rb`, el mod añade **Archivo → Activar/desactivar depurador de Ruby (VS Code)**. La opción crea o elimina `Debugger/enabled`. El juego debe leer ese marcador al arrancar y tener su propio servidor de depuración Ruby. Para conectarte, ejecuta el juego y usa la configuración de conexión de VS Code de tu base.
-# msmod-ruby-debugger
+The menu item **File → Toggle Ruby Debugger (VS Code)** only appears when the open project contains `Debugger/debugger.rb` (for example, La Base de Sky). With any other project the mod does nothing.
+
+## What it does
+
+It writes `Debugger/enabled` in the game folder: `1` turns the debugger on, `off` turns it off. The file is never deleted. On the next launch the game reads it and opens a debug server on `127.0.0.1:12345`.
+
+## Requirements
+
+- A game base with the `Debugger/` folder and an executable built with the debugger.
+- VS Code with the `KoichiSasada.vscode-rdbg` extension.
+
+## Usage
+
+1. Open the project in Maker Studio and choose **File → Toggle Ruby Debugger (VS Code)**.
+2. Set a breakpoint in a `.rb` file in VS Code.
+3. Run the game from Maker Studio.
+4. In VS Code, start **LBDS: conectar al depurador** (F5). Repeat on every game launch.
+
+Full guide (Spanish): https://github.com/dpertierra/la-base-de-sky-wiki
+
+## Permissions
+
+`fs.project` and `fs.write.project` to read and write `Debugger/enabled`; `ui.toasts` for the status message.
+
+## License
+
+MIT
