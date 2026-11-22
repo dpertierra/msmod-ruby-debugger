@@ -1,7 +1,13 @@
 const debuggerScript = "Debugger/debugger.rb";
 const marker = "Debugger/enabled";
 
-export async function activate(ctx) {
+// The editor detects ES modules with a regex that does not match
+// "export async function", so activate must be a plain function.
+export function activate(ctx) {
+  setup(ctx).catch((error) => ctx.log.error(String(error)));
+}
+
+async function setup(ctx) {
   const root = ctx.editor.gameRoot();
   if (!root) return;
 
