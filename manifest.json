@@ -1,0 +1,9 @@
+{
+  "id": "com.dpertierrra.ruby-debugger",
+  "name": "Ruby Debugger (VS Code)",
+  "version": "1.0.0",
+  "apiVersion": "1.0.0",
+  "description": "Toggles the Ruby debugger on the next launch of a compatible game.",
+  "main": "index.js",
+  "permissions": ["fs.project", "fs.write.project", "ui.toasts"]
+}
