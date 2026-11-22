@@ -1,6 +1,13 @@
 const debuggerScript = "Debugger/debugger.rb";
 const marker = "Debugger/enabled";
 
+// Inline SVG: the built-in "bug" icon name only exists in some editor builds.
+const bugIcon =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" ' +
+  'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<rect x="8" y="6" width="8" height="14" rx="4"/>' +
+  '<path d="M19 7l-3 2M5 7l3 2M19 19l-3-2M5 19l3-2M20 13h-4M4 13h4M10 4l1 2M14 4l-1 2"/></svg>';
+
 // The editor detects ES modules with a regex that does not match
 // "export async function", so activate must be a plain function.
 export function activate(ctx) {
@@ -33,6 +40,7 @@ async function setup(ctx) {
   ctx.menu.registerMenuItem({
     menu: "File",
     label: ctx.i18n.t(label),
+    icon: bugIcon,
     isEnabled: () => ctx.editor.gameRoot() === root,
     handler: async () => {
       if (busy || ctx.editor.gameRoot() !== root) return;
